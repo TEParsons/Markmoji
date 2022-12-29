@@ -49,7 +49,9 @@ def markmoji(content:str):
         obj = cls(label=label, link=link)
         # Return object as HTML
         return obj.html
-    
-    content = re.sub(f"({'|'.join(list(map))})\[(.*)\]\((.*)\)", _objectify, content)
+    emojis = "|".join(list(map))
+    content = re.sub(
+        f"({emojis})\[([^\]]*)\]\(([^\)]*)\)", 
+        _objectify, content)
 
     return content
