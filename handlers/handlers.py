@@ -1,3 +1,5 @@
+import re
+
 from .base import BaseMarkmojiHandler
 
 
@@ -76,3 +78,29 @@ class TweetHandler(BaseMarkmojiHandler):
     @property
     def html(self):
         return f"<blockquote class=twitter-tweet><a href='{self.link}'></a></blockquote>"
+
+
+class YouTubeHandler(BaseMarkmojiHandler):
+    """
+    Handler for an embedded YouTube video.
+
+    Parameters
+    ==========
+    label : str
+        Alt text for the embedded video
+    link : str
+        Link to the video to embed
+    """
+    # The ol' YouTube play button
+    emoji = "▶️"
+
+    @property
+    def html(self):
+        # Get video ID from link
+        match = re.match("^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*", self.link)
+        if match:
+            video_id = match.groups()[-1]
+        else:
+            video_id = self.link
+
+        return f"<iframe src='https://www.youtube.com/embed/{video_id}' title='{self.label}' allowfullscreen></iframe>"
