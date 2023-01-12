@@ -42,7 +42,9 @@ class UnknownHandler(BaseMarkmojiHandler):
     def html(self):
         return f"{self.emoji}<a href='{self.link}'>{self.label}</a>"
 
-    
+
+# --- From here on in, keep it alphabetical! ---
+
 
 class AltmetricHandler(BaseMarkmojiHandler):
     """
@@ -64,6 +66,32 @@ class AltmetricHandler(BaseMarkmojiHandler):
         return f"<altmetric-embed data-doi={self.link}>{self.label}</altmetric-embed>"
 
 
+class TootHandler(BaseMarkmojiHandler):
+    """
+    Handler for an embedded toot (from Mastodon).
+
+    Parameters
+    ==========
+    label : str
+        Unused as embedded toots don't have alt text
+    link : str
+        Link to the toot to embed
+    """
+    # Elephant emoji, like what everyone's got on their Twitter usernames
+    emoji = "🐘"
+    __author__ = "🦊"
+
+    @property
+    def html(self):
+        link = self.link
+        # Make sure we're using the /embed link
+        _, embed = re.match("(https?://)?[\w\d]*\.com/@[\w\d]*/\d*(/embed)?", link).groups()
+        if embed is None:
+            link += "/embed"
+        # Construct iframe
+        return f"<iframe src='{self.link}' class='mastodon-embed'></iframe><script src='https://toot.wales/embed.js' async='async'></script>"
+
+
 class TweetHandler(BaseMarkmojiHandler):
     """
     Handler for an embedded tweet.
@@ -73,7 +101,7 @@ class TweetHandler(BaseMarkmojiHandler):
     label : str
         Unused as embedded tweets don't have alt text
     link : str
-        Link to the tweet to embed
+        Link to the tweet to embed, or its ID
     """
     # Bird emoji... because Twitter...
     emoji = "🐦"
@@ -81,7 +109,7 @@ class TweetHandler(BaseMarkmojiHandler):
 
     @property
     def html(self):
-        return f"<blockquote class=twitter-tweet><a href='{self.link}'></a></blockquote>"
+        return f"<blockquote class=twitter-tweet><a href='{self.link}'></a></blockquote><script async src='https://platform.twitter.com/widgets.js' charset='utf-8'></script>"
 
 
 class YouTubeHandler(BaseMarkmojiHandler):
