@@ -16,6 +16,7 @@ class ExampleHandler(BaseMarkmojiHandler):
     """
 
     emoji = "⬇️"
+    __author__ = "🦊"
 
     @property
     def html(self):
@@ -35,6 +36,7 @@ class UnknownHandler(BaseMarkmojiHandler):
     """
 
     emoji = "❓"
+    __author__ = "🦊"
 
     @property
     def html(self):
@@ -55,6 +57,7 @@ class AltmetricHandler(BaseMarkmojiHandler):
     """
     # Volleyball emoji, because it looks a bit like the altmetric doughnuts
     emoji = "🏐"
+    __author__ = "🦊"
 
     @property
     def html(self):
@@ -74,6 +77,7 @@ class TweetHandler(BaseMarkmojiHandler):
     """
     # Bird emoji... because Twitter...
     emoji = "🐦"
+    __author__ = "🦊"
 
     @property
     def html(self):
@@ -93,6 +97,7 @@ class YouTubeHandler(BaseMarkmojiHandler):
     """
     # The ol' YouTube play button
     emoji = "▶️"
+    __author__ = "🦊"
 
     @property
     def html(self):
