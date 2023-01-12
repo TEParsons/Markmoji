@@ -91,7 +91,7 @@ class InstagramPostHandler(BaseMarkmojiHandler):
 
     emoji = "📷"
 
-    example = "[OSR RPG cover by Kim Dias Holm](https://www.instagram.com/p/CkYXXhlt5N7/)"
+    example = "📷[OSR RPG cover by Kim Dias Holm](https://www.instagram.com/p/CkYXXhlt5N7/)"
     __author__ = "🦊"
 
     @property
@@ -126,7 +126,7 @@ class TootHandler(BaseMarkmojiHandler):
         if embed is None:
             link += "/embed"
         # Construct iframe
-        return f"<iframe src='{self.link}' class='mastodon-embed'></iframe><script src='https://toot.wales/embed.js' async='async'></script>"
+        return f"<iframe src='{link}' class='mastodon-embed'></iframe><script src='https://toot.wales/embed.js' async='async'></script>"
 
 
 class TumblrPostHandler(BaseMarkmojiHandler):
@@ -149,7 +149,7 @@ class TumblrPostHandler(BaseMarkmojiHandler):
     @property
     def html(self):
         # Get username and post id from link
-        _, username, post_id, _ = re.match("(https?://)?([\w\d-_]*)\.tumblr\.com/post/(\d*)(/.*)?", self.link).groups()
+        _, username, post_id, _ = re.match("(https?://)?([\w\d\-_]*)\.tumblr\.com/post/(\d*)(/.*)?", self.link).groups()
         # Construct holder
         return f"<div class='tumblr-post' data-href='https://embed.tumblr.com/embed/post/{username}/{post_id}'><a href='{self.link}'></a></div>  <script async src='https://assets.tumblr.com/post.js'></script>"
 
