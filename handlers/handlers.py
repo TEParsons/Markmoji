@@ -95,14 +95,14 @@ class InstagramPostHandler(BaseMarkmojiHandler):
     emoji = "📷"
     requirements = "<script async src='//www.instagram.com/embed.js'></script>"
 
-    example = "📷[OSR RPG cover by Kim Dias Holm](https://www.instagram.com/p/CkYXXhlt5N7/)"
+    example = "📷[OSR RPG cover by Kim Dias Holm](https://www.instagram.com/p/CkYXXhlt5N7)"
     __author__ = "🦊"
 
     @property
     def html(self):
         _, _, post_id = re.match("(https?://)?(www\.)?instagram\.com/p/([\w\d]*)", self.link).groups()
 
-        return f"<blockquote class='instagram-media' data-instgrm-captioned data-instgrm-permalink='https://www.instagram.com/p/{post_id}/?utm_source=ig_embed&amp;utm_campaign=loading'></a></p></div></blockquote>"
+        return f"<blockquote class='instagram-media' data-instgrm-captioned data-instgrm-permalink='https://www.instagram.com/p/{post_id}/?utm_source=ig_embed&amp;utm_campaign=loading' data-instgrm-version='14'><a href='https://www.instagram.com/p/{post_id}/?utm_source=ig_embed&amp;utm_campaign=loading'>{self.label}</a></blockquote>"
 
 
 class TootHandler(BaseMarkmojiHandler):
