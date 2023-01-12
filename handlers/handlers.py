@@ -47,7 +47,7 @@ class AltmetricHandler(BaseMarkmojiHandler):
     # Volleyball emoji, because it looks a bit like the altmetric doughnuts
     emoji = "🏐"
 
-    example = "🏐[Mather, G., Sharman, R. J., & Parsons, T. (2017). Visual adaptation alters the apparent speed of real-world actions. *Scientific reports, 7*(1), 1-10.](10.1038/s41598-017-06841-5)\n"
+    example = "🏐[Mather, G., Sharman, R. J., & Parsons, T. (2017). Visual adaptation alters the apparent speed of real-world actions. *Scientific reports, 7*(1), 1-10.](10.1038/s41598-017-06841-5)"
     __author__ = "🦊"
 
     @property
@@ -105,6 +105,31 @@ class TootHandler(BaseMarkmojiHandler):
         return f"<iframe src='{self.link}' class='mastodon-embed'></iframe><script src='https://toot.wales/embed.js' async='async'></script>"
 
 
+class TumblrPostHandler(BaseMarkmojiHandler):
+    """
+    Handler for an embedded Tumblr post
+
+    Parameters
+    ==========
+    label : str
+        Unused as embedded Tumblr posts don't have alt text
+    link : str
+        Link to the post to embed (format should be `{username}.tumblr.com/post/{numeric id}/whatever-else-it-doesn't-matter`)
+    """
+
+    emoji = "ⓣ"
+
+    example = "ⓣ[Some cute spooky pokémon](https://tinyleavesdream.tumblr.com/post/663071895596548096)"
+    __author__ = "🦊"
+
+    @property
+    def html(self):
+        # Get username and post id from link
+        _, username, post_id, _ = re.match("(https?://)?([\w\d-_]*)\.tumblr\.com/post/(\d*)(/.*)?", self.link).groups()
+        # Construct holder
+        return f"<div class='tumblr-post' data-href='https://embed.tumblr.com/embed/post/{username}/{post_id}'><a href='{self.link}'></a></div>  <script async src='https://assets.tumblr.com/post.js'></script>"
+
+
 class TweetHandler(BaseMarkmojiHandler):
     """
     Handler for an embedded tweet.
@@ -114,7 +139,7 @@ class TweetHandler(BaseMarkmojiHandler):
     label : str
         Unused as embedded tweets don't have alt text
     link : str
-        Link to the tweet to embed, or its ID
+        Link to the tweet to embed
     """
     # Bird emoji... because Twitter...
     emoji = "🐦"
