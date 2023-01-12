@@ -66,6 +66,26 @@ class AltmetricHandler(BaseMarkmojiHandler):
         return f"<altmetric-embed data-doi={self.link}>{self.label}</altmetric-embed>"
 
 
+class FacebookPostHandler(BaseMarkmojiHandler):
+    """
+    Handler for an embedded post (from Facebook).
+
+    Parameters
+    ==========
+    label : str
+        Unused as embedded posts don't have alt text
+    link : str
+        Link to the post to embed
+    """
+    # F in a square looks like the facebook logo
+    emoji = "🅵"
+    __author__ = "🦊"
+
+    @property
+    def html(self):
+        return f"<iframe src='https://www.facebook.com/plugins/post.php?href={self.link}'></iframe>"
+
+
 class TootHandler(BaseMarkmojiHandler):
     """
     Handler for an embedded toot (from Mastodon).
