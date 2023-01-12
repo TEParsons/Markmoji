@@ -16,6 +16,8 @@ class ExampleHandler(BaseMarkmojiHandler):
     """
     # Pick an emoji to represent this handler, it should be something memorable and intuitive!
     emoji = "⬇️"
+    # Anything which needs to be in <head> goes here, they will only be included once even if you have multiple markmojis
+    requirements = "<script>console.log('hello world!')</script>"
     # Give us an example usage (for the documentation)
     example = "⬇️[Google](https://google.com)"
     # Give yourself credit! Assign yourself an emoji in ../authors.py and cite it here
@@ -46,13 +48,14 @@ class AltmetricHandler(BaseMarkmojiHandler):
     """
     # Volleyball emoji, because it looks a bit like the altmetric doughnuts
     emoji = "🏐"
+    requirements = "<script type='text/javascript' src='https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js'></script>"
 
     example = "🏐[Mather, G., Sharman, R. J., & Parsons, T. (2017). Visual adaptation alters the apparent speed of real-world actions. *Scientific reports, 7*(1), 1-10.](10.1038/s41598-017-06841-5)"
     __author__ = "🦊"
 
     @property
     def html(self):
-        return f"<altmetric-embed data-doi={self.link}>{self.label}</altmetric-embed>"
+        return f"<div class='altmetric-embed' data-badge-type='donut' data-doi='{self.link}'></div>{self.label}"
 
 
 class FacebookPostHandler(BaseMarkmojiHandler):
@@ -90,6 +93,7 @@ class InstagramPostHandler(BaseMarkmojiHandler):
     """
 
     emoji = "📷"
+    requirements = "<script async src='//www.instagram.com/embed.js'></script>"
 
     example = "📷[OSR RPG cover by Kim Dias Holm](https://www.instagram.com/p/CkYXXhlt5N7/)"
     __author__ = "🦊"
@@ -98,7 +102,7 @@ class InstagramPostHandler(BaseMarkmojiHandler):
     def html(self):
         _, _, post_id = re.match("(https?://)?(www\.)?instagram\.com/p/([\w\d]*)", self.link).groups()
 
-        return f"<blockquote class='instagram-media' data-instgrm-captioned data-instgrm-permalink='https://www.instagram.com/p/{post_id}/?utm_source=ig_embed&amp;utm_campaign=loading'></a></p></div></blockquote> <script async src='//www.instagram.com/embed.js'></script>"
+        return f"<blockquote class='instagram-media' data-instgrm-captioned data-instgrm-permalink='https://www.instagram.com/p/{post_id}/?utm_source=ig_embed&amp;utm_campaign=loading'></a></p></div></blockquote>"
 
 
 class TootHandler(BaseMarkmojiHandler):
@@ -114,6 +118,7 @@ class TootHandler(BaseMarkmojiHandler):
     """
     # Elephant emoji, like what everyone's got on their Twitter usernames
     emoji = "🐘"
+    requirements = "<script src='https://toot.wales/embed.js' async='async'></script>"
 
     example = "🐘[God has a point](https://universeodon.com/@TheTweetOfGod/109597493614530062)"
     __author__ = "🦊"
@@ -126,7 +131,7 @@ class TootHandler(BaseMarkmojiHandler):
         if embed is None:
             link += "/embed"
         # Construct iframe
-        return f"<iframe src='{link}' class='mastodon-embed'></iframe><script src='https://toot.wales/embed.js' async='async'></script>"
+        return f"<iframe src='{link}' class='mastodon-embed'></iframe>"
 
 
 class TumblrPostHandler(BaseMarkmojiHandler):
@@ -142,6 +147,7 @@ class TumblrPostHandler(BaseMarkmojiHandler):
     """
 
     emoji = "ⓣ"
+    requirements = "<script async src='https://assets.tumblr.com/post.js'></script>"
 
     example = "ⓣ[Some cute spooky pokémon](https://tinyleavesdream.tumblr.com/post/663071895596548096)"
     __author__ = "🦊"
@@ -151,7 +157,7 @@ class TumblrPostHandler(BaseMarkmojiHandler):
         # Get username and post id from link
         _, username, post_id, _ = re.match("(https?://)?([\w\d\-_]*)\.tumblr\.com/post/(\d*)(/.*)?", self.link).groups()
         # Construct holder
-        return f"<div class='tumblr-post' data-href='https://embed.tumblr.com/embed/post/{username}/{post_id}'><a href='{self.link}'></a></div>  <script async src='https://assets.tumblr.com/post.js'></script>"
+        return f"<div class='tumblr-post' data-href='https://embed.tumblr.com/embed/post/{username}/{post_id}'><a href='{self.link}'></a></div>"
 
 
 class TweetHandler(BaseMarkmojiHandler):
@@ -167,13 +173,14 @@ class TweetHandler(BaseMarkmojiHandler):
     """
     # Bird emoji... because Twitter...
     emoji = "🐦"
+    requirements = "<script async src='https://platform.twitter.com/widgets.js' charset='utf-8'></script>"
 
     example = "🐦[Ed Balls.](https://twitter.com/edballs/status/63623585020915713)"
     __author__ = "🦊"
 
     @property
     def html(self):
-        return f"<blockquote class=twitter-tweet><a href='{self.link}'></a></blockquote><script async src='https://platform.twitter.com/widgets.js' charset='utf-8'></script>"
+        return f"<blockquote class=twitter-tweet><a href='{self.link}'></a></blockquote>"
 
 
 class UnknownHandler(BaseMarkmojiHandler):

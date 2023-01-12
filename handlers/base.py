@@ -2,6 +2,8 @@ class BaseMarkmojiHandler:
     # The emoji handled by this handler, overload this when making your 
     # own markmoji handlers!
     emoji = "?"
+    requirements = ""
+    example = ""
     __author__ = ""
 
     def __init__(self, label:str, link:str):
