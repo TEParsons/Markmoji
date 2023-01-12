@@ -77,6 +77,30 @@ class FacebookPostHandler(BaseMarkmojiHandler):
         return f"<iframe src='https://www.facebook.com/plugins/post.php?href={self.link}'></iframe>"
 
 
+class InstagramPostHandler(BaseMarkmojiHandler):
+    """
+    Handler for an embedded Instagram post.
+
+    Parameters
+    ==========
+    label : str
+        Unused as embedded posts don't have alt text
+    link : str
+        Link to the post to embed
+    """
+
+    emoji = "📷"
+
+    example = "[OSR RPG cover by Kim Dias Holm](https://www.instagram.com/p/CkYXXhlt5N7/)"
+    __author__ = "🦊"
+
+    @property
+    def html(self):
+        _, _, post_id = re.match("(https?://)?(www\.)?instagram\.com/p/([\w\d]*)", self.link).groups()
+
+        return f"<blockquote class='instagram-media' data-instgrm-captioned data-instgrm-permalink='https://www.instagram.com/p/{post_id}/?utm_source=ig_embed&amp;utm_campaign=loading'></a></p></div></blockquote> <script async src='//www.instagram.com/embed.js'></script>"
+
+
 class TootHandler(BaseMarkmojiHandler):
     """
     Handler for an embedded toot (from Mastodon).
