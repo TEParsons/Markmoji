@@ -208,7 +208,7 @@ class YouTubeHandler(BaseMarkmojiHandler):
     # The ol' YouTube play button
     emoji = "▶️"
 
-    example = "▶️[Ten Hours of Nick Offerman's Yule Log](https://www.youtube.com/watch?v=IQpW5sG5bg8)"
+    example = "▶️[They're taking the hobbits to Isengard!](https://www.youtube.com/watch?v=uE-1RPDqJAY)"
     __author__ = "🦊"
 
     @property
