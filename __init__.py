@@ -1,2 +1,2 @@
 from .markmoji import markmoji, Markmoji
-from . import authors
+from . import authors, handlers, tests
