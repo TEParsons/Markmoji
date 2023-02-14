@@ -4,6 +4,7 @@ import markmoji
 
 import logging
 import textwrap
+from os import mkdir
 from pathlib import Path
 
 # Setup some useful stuffimp
@@ -11,6 +12,9 @@ encoding = 'utf-8'
 logging.getLogger().setLevel(logging.INFO)
 rootDir = Path(__file__).parent / "docs"
 handlersDir = rootDir / "handlers"
+# Make sure we have a handlers dir
+if not handlersDir.is_dir():
+    mkdir(str(handlersDir))
 
 # Setup markdown processor
 md = markdown.Markdown(extensions=["extra", markmoji.Markmoji()])
