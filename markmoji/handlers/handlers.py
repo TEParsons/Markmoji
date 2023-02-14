@@ -72,12 +72,12 @@ class FacebookPostHandler(BaseMarkmojiHandler):
     # F in a square looks like the facebook logo
     emoji = "🅵"
 
-    example = "🅵[Barack Obama announces presidential run (2008)](https://www.facebook.com/TheXKCD/posts/pfbid0KZZoxocUJYYE8NnZUHtpDkmr7Jw1qpMBE4QpFKBNBMVJByNX9iPctUfpRCmCwCiMl)"
+    example = "🅵[Funny comic](https://www.facebook.com/TheXKCD/posts/pfbid0KZZoxocUJYYE8NnZUHtpDkmr7Jw1qpMBE4QpFKBNBMVJByNX9iPctUfpRCmCwCiMl)"
     __author__ = "🦊"
 
     @property
     def html(self):
-        return f"<iframe src='https://www.facebook.com/plugins/post.php?href={self.link}'></iframe>"
+        return f"<iframe src='https://www.facebook.com/plugins/post.php?href={self.link}' class=facebook-embed></iframe>"
 
 
 class InstagramPostHandler(BaseMarkmojiHandler):
@@ -214,7 +214,7 @@ class YouTubeHandler(BaseMarkmojiHandler):
     # The ol' YouTube play button
     emoji = "▶️"
 
-    example = "▶️[They're taking the hobbits to Isengard!](https://www.youtube.com/watch?v=uE-1RPDqJAY)"
+    example = "▶️[They're taking the hobbits to Isengard!](https://www.youtube.com/watch?v=jfKfPfyJRdk)"
     __author__ = "🦊"
 
     @property
@@ -226,4 +226,4 @@ class YouTubeHandler(BaseMarkmojiHandler):
         else:
             video_id = self.link
 
-        return f"<iframe src='https://www.youtube.com/embed/{video_id}' title='{self.label}' allowfullscreen></iframe>"
+        return f"<iframe src='https://www.youtube.com/embed/{video_id}' title='{self.label}' class='youtube-embed' allowfullscreen></iframe>"

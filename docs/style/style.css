@@ -16,6 +16,7 @@
 
     color: var(--offblack);
 }
+
 /** Background **/
 html {
     background-image: url("https://images.pexels.com/photos/796607/pexels-photo-796607.jpeg");
@@ -29,6 +30,7 @@ html:after {
     content: "Background: Ylanite Koppens via Pexels [796607]";
     font-size: 0.8em;
 }
+
 /** Page **/
 body {
     width: 24cm;
@@ -40,6 +42,7 @@ body {
     border-radius: 5px;
     background-color: var(--white);
 }
+
 /** Links **/
 a {
     color: var(--offblack);
@@ -62,4 +65,9 @@ pre {
 }
 code {
     padding: 0.2em;
+}
+
+/** iframes **/
+iframe {
+    border: none;
 }
