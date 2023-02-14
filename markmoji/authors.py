@@ -1,4 +1,16 @@
-from pybtex.database import Person
+try:
+    from pybtex.database import Person
+except ImportError:
+    class Person:
+        """
+        If Pybtex isn't installed, use this placeholder object which has enough attributes that 
+        markmoji doesn't break.
+        """
+        def __init__(self, string='', first='', middle='', prelast='', last='', lineage=''):
+            self.first_names = [first]
+            self.middle_names = [middle] + [prelast]
+            self.last_names = [last]
+            self.lineage = lineage
 
 # Emojis representing authors, pick something fun!
 authors = {
