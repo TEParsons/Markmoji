@@ -1,5 +1,3 @@
 __pycache__
 desktop.ini
 tests/**/*_local.*
-docs/**/*.html
-docs/handlers/*.md
