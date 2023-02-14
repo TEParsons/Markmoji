@@ -1,5 +1,14 @@
 Markmoji extends the [basic markdown syntax](https://www.markdownguide.org/basic-syntax/) using an easy to understand and quickly readable emoji-based syntax, allowing you to create custom HTML elements from just an emoji, a label and a URL.
 
+## Installing
+Markmoji is on PyPi! To install, just copy the following into a terminal:
+
+```
+pip install markmoji
+```
+
+[Click here](https://datatofish.com/install-package-python-using-pip/) for more instructions on what installing from pip means.
+
 # The Syntax
 Similar to how basic markdown indicates an image using an exclamation point before a link (`![name](url)`), markmoji syntax uses an emoji beore a link (`🐦[name](url)`), with the emoji dictating the type of HTML element created.
 
