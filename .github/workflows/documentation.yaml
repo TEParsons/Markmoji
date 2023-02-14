@@ -20,4 +20,15 @@ jobs:
         pip install -r docs/requirements.txt
     - name: Compile
       run: |
-        compile_docs.py
+        python compile_docs.py
+    - name: Commit
+      run: |
+        git config --local user.name "github-actions[bot]"
+        git add --all
+        git commit --all -m "Build"
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: gh-pages
+        force: true
