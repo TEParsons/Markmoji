@@ -1,0 +1,16 @@
+README.md
+pyproject.toml
+setup.cfg
+setup.py
+markmoji/__init__.py
+markmoji/authors.py
+markmoji/markmoji.py
+markmoji.egg-info/PKG-INFO
+markmoji.egg-info/SOURCES.txt
+markmoji.egg-info/dependency_links.txt
+markmoji.egg-info/requires.txt
+markmoji.egg-info/top_level.txt
+markmoji/handlers/__init__.py
+markmoji/handlers/base.py
+markmoji/handlers/handlers.py
+markmoji/handlers/map.py
