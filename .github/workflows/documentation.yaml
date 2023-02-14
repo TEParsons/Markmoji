@@ -1,0 +1,23 @@
+name: Documentation
+on:
+  push:
+    branches:
+    - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Setup Python
+      uses: actions/setup-python@v2
+    - name: Checkout branch
+      uses: actions/checkout@master
+      with:
+        fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
+    - name: Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r markmoji/requirements.txt
+        pip install -r docs/requirements.txt
+    - name: Compile
+      run: |
+        compile_docs.py

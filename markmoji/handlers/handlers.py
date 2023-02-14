@@ -7,12 +7,12 @@ class ExampleHandler(BaseMarkmojiHandler):
     """
     Example handler, just to show you how to make one.
 
-    Parameters
-    ==========
-    label : str
-        The value in square brackets from the given markdown string
-    link : str
-        The value in round brackets from the given markdown string
+    ### Parameters
+    label (str)
+    :    The value in square brackets from the given markdown string
+
+    link (str)
+    :    The value in round brackets from the given markdown string
     """
     # Pick an emoji to represent this handler, it should be something memorable and intuitive!
     emoji = "⬇️"
@@ -39,12 +39,12 @@ class AltmetricHandler(BaseMarkmojiHandler):
     """
     Handler for an altmetric citation.
 
-    Parameters
-    ==========
-    label : str
-        Text citation
-    link : str
-        DOI link (if any)
+    ### Parameters
+    label (str)
+    :    Text citation
+
+    link (str)
+    :    DOI link (if any)
     """
     # Volleyball emoji, because it looks a bit like the altmetric doughnuts
     emoji = "🏐"
@@ -62,12 +62,12 @@ class FacebookPostHandler(BaseMarkmojiHandler):
     """
     Handler for an embedded post (from Facebook).
 
-    Parameters
-    ==========
-    label : str
-        Unused as embedded posts don't have alt text
-    link : str
-        Link to the post to embed
+    ### Parameters
+    label (str)
+    :    Unused as embedded posts don't have alt text
+
+    link (str)
+    :    Link to the post to embed
     """
     # F in a square looks like the facebook logo
     emoji = "🅵"
@@ -84,12 +84,12 @@ class InstagramPostHandler(BaseMarkmojiHandler):
     """
     Handler for an embedded Instagram post.
 
-    Parameters
-    ==========
-    label : str
-        Unused as embedded posts don't have alt text
-    link : str
-        Link to the post to embed
+    ### Parameters
+    label (str)
+    :    Unused as embedded posts don't have alt text
+
+    link (str)
+    :    Link to the post to embed
     """
 
     emoji = "📷"
@@ -109,12 +109,12 @@ class TootHandler(BaseMarkmojiHandler):
     """
     Handler for an embedded toot (from Mastodon).
 
-    Parameters
-    ==========
-    label : str
-        Unused as embedded toots don't have alt text
-    link : str
-        Link to the toot to embed
+    ### Parameters
+    label (str)
+    :    Unused as embedded toots don't have alt text
+
+    link (str)
+    :    Link to the toot to embed
     """
     # Elephant emoji, like what everyone's got on their Twitter usernames
     emoji = "🐘"
@@ -138,12 +138,12 @@ class TumblrPostHandler(BaseMarkmojiHandler):
     """
     Handler for an embedded Tumblr post
 
-    Parameters
-    ==========
-    label : str
-        Unused as embedded Tumblr posts don't have alt text
-    link : str
-        Link to the post to embed (format should be `{username}.tumblr.com/post/{numeric id}/whatever-else-it-doesn't-matter`)
+    ### Parameters
+    label (str)
+    :    Unused as embedded Tumblr posts don't have alt text
+
+    link (str)
+    :    Link to the post to embed (format should be `{username}.tumblr.com/post/{numeric id}/whatever-else-it-doesn't-matter`)
     """
 
     emoji = "ⓣ"
@@ -164,12 +164,12 @@ class TweetHandler(BaseMarkmojiHandler):
     """
     Handler for an embedded tweet.
 
-    Parameters
-    ==========
-    label : str
-        Unused as embedded tweets don't have alt text
-    link : str
-        Link to the tweet to embed
+    ### Parameters
+    label (str)
+    :    Unused as embedded tweets don't have alt text
+
+    link (str)
+    :    Link to the tweet to embed
     """
     # Bird emoji... because Twitter...
     emoji = "🐦"
@@ -187,8 +187,7 @@ class UnknownHandler(BaseMarkmojiHandler):
     """
     Handler to use when format isn't recognised.
 
-    Parameters
-    ==========
+    ### Parameters
     """
 
     emoji = "❓"
@@ -205,12 +204,12 @@ class YouTubeHandler(BaseMarkmojiHandler):
     """
     Handler for an embedded YouTube video.
 
-    Parameters
-    ==========
-    label : str
-        Alt text for the embedded video
-    link : str
-        Link to the video to embed
+    ### Parameters
+    label (str)
+    :    Alt text for the embedded video
+
+    link (str)
+    :    Link to the video to embed
     """
     # The ol' YouTube play button
     emoji = "▶️"
