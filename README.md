@@ -20,13 +20,5 @@ processor = md.Markdown(extensions=[markmoji.Markmoji()])
 content = processor.convert(content)
 ```
 
-# Implementations
-Currently, the following emojis can be used to create the corresponding elements, using the `[label]` and `(url)` parts of the string as described:
-
-| Emoji | Element | Label... | Url... |
-| ----- | ------- | -------- | ------ |
-| 🐦 | Embedded tweet | Not used | URL of the tweet to embed |
-| 🏐 | Altmetric citation | Text citation | Article DOI |
-
 # Contributing
 This is all designed with open source contribution in mind! To add your own handlers, check out the file `handlers/handlers.py` to see the existing implementations and some instructions on how to add your own. It's not all that hard to do, I promise!
