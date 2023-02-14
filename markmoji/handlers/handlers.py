@@ -50,12 +50,12 @@ class AltmetricHandler(BaseMarkmojiHandler):
     emoji = "🏐"
     requirements = "<script type='text/javascript' src='https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js'></script>"
 
-    example = "🏐[Mather, G., Sharman, R. J., & Parsons, T. (2017). Visual adaptation alters the apparent speed of real-world actions. *Scientific reports, 7*(1), 1-10.](10.1038/s41598-017-06841-5)"
+    example = "🏐[Mather, G., Sharman, R. J., & Parsons, T. (2017). Visual adaptation alters the apparent speed of real-world actions. <i>Scientific reports, 7</i>(1), 1-10.](10.1038/s41598-017-06841-5)"
     __author__ = "🦊"
 
     @property
     def html(self):
-        return f"<div class='altmetric-embed' data-badge-type='donut' data-doi='{self.link}'></div>{self.label}"
+        return f"<div class='altmetric-citation'><div class='altmetric-embed' data-badge-type='donut' data-doi='{self.link}'></div><span>{self.label}</span></div>"
 
 
 class FacebookPostHandler(BaseMarkmojiHandler):
