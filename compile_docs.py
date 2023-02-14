@@ -31,7 +31,7 @@ for cls in markmoji.handlers.map.values():
     # Create content...
         # Add style ref
     content = (
-        "<head><link rel='stylesheet' href='../_style/style.css'></link></head>\n"
+        "<head><link rel='stylesheet' href='../style/style.css'></link></head>\n"
     )
     # Title
     content += f"# `markmoji.handlers.{cls.__name__}`\n"
@@ -49,14 +49,14 @@ for cls in markmoji.handlers.map.values():
     authorName = f"{author.first_names[0]} {author.last_names[0]}"
     content += (
         f"## Author\n"
-        f"{author} ({cls.__author__})\n"
+        f"{authorName} ({cls.__author__})\n"
     )
     # Save markdown file
     filename = handlersDir / (cls.__name__ + ".md")
     with open(str(filename), "w", encoding=encoding) as f:
         f.write(content)
 # Create index for handlers
-content = "<head><link rel='stylesheet' href='../_style/style.css'></link></head>\n"
+content = "<head><link rel='stylesheet' href='../style/style.css'></link></head>\n"
 content += (
     "# Handlers\n"
     "Below are links to the handlers which Markmoji can use, and their corresponding emoji:\n"
