@@ -1,11 +1,65 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Colr+Emoji+Glyf');
+
+@import url('handlers.css');
 
 :root {
     font-family: 'Poppins', 'Noto Colr Emoji Glyf';
-}
+    
+    --white: #fdfdfd;
+    --offwhite: #f8f8f8;
+    --blue: #6290C3;
+    --red: #FF3A20;
+    --green: #58BC82;
+    --offblack: #0C1713;
 
+    color: var(--offblack);
+}
+/** Background **/
+html {
+    background-image: url("https://images.pexels.com/photos/796607/pexels-photo-796607.jpeg");
+    background-size: cover;
+    background-attachment: fixed;
+}
+html:after {
+    padding: 0.5em 2em;
+    background-color: rgba(0, 0, 0, 0.4);
+    color: white;
+    content: "Background: Ylanite Koppens via Pexels [796607]";
+    font-size: 0.8em;
+}
+/** Page **/
 body {
     width: 24cm;
     margin: 4rem auto;
+    padding: 4rem;
+    box-shadow:
+    inset 0cm -0cm 0.1cm 0.05cm rgba(0, 0, 0, 0.1),
+    .5cm .5cm 1cm .5cm rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+    background-color: var(--white);
+}
+/** Links **/
+a {
+    color: var(--offblack);
+    text-decoration-color: var(--blue);
+}
+a:hover {
+    color: var(--blue);
+    text-decoration-color: var(--offblack);
+}
+
+/** Code **/
+pre, code {
+    font-family: JetBrains Mono;
+    line-height: 2em;
+    background-color: #f8f8f8;
+}
+pre {
+    white-space: pre-wrap;
+    padding: 1rem 2rem;
+}
+code {
+    padding: 0.2em;
 }
