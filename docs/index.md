@@ -1,4 +1,4 @@
-<head><link rel='stylesheet' href='/style/style.css'></link></head>
+<head><link rel='stylesheet' href='style/style.css'></link></head>
 
 # Markmoji
 
