@@ -79,7 +79,7 @@ def markmoji(content:str):
         return obj.html
     emojis = "|".join(list(map))
     content = re.sub(
-        f"(\\\\)?({emojis})\[([^\]]*)\]\(([^\)]*)\)", 
+        f"(?<!`)(\\\\)?({emojis})\[([^\]]*)\]\(([^\)]*)\)(?!`)", 
         _objectify, content)
 
     return content, classes_used
