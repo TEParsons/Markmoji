@@ -52,9 +52,13 @@ def markmoji(content:str):
     classes_used = []
     def _objectify(match):
         # Split match into emoji, label and link
-        emoji = match.group(1)
-        label = match.group(2)
-        link = match.group(3)
+        escaped = match.group(1)
+        emoji = match.group(2)
+        label = match.group(3)
+        link = match.group(4)
+        # If escaped, return unescaped & unprocessed
+        if escaped:
+            return f"{emoji}[{label}]({link})"
         # Find correct class from map of classes
         cls = map.get(emoji, handlers.UnknownHandler)
         # Create object
@@ -66,7 +70,7 @@ def markmoji(content:str):
         return obj.html
     emojis = "|".join(list(map))
     content = re.sub(
-        f"(?<!\\)({emojis})\[([^\]]*)\]\(([^\)]*)\)", 
+        f"(\\\\)?({emojis})\[([^\]]*)\]\(([^\)]*)\)", 
         _objectify, content)
 
     return content, classes_used
