@@ -13,12 +13,21 @@ class Markmoji(Extension):
         Markdown preprocessor using markmoji
         """
         def run(self, lines):
+            # Keep track of whether we're in a code block
+            inLiteral = False
             # Iterate through lines
             new_lines = []
             classes_used = []
             for line in lines:
-                # Process markmoji syntax on line
-                new_line, cls = markmoji(line)
+                # If code block opener is found, toggle literal
+                if "```" in line:
+                    inLiteral = not inLiteral
+                if not inLiteral:
+                    # Process markmoji syntax on line
+                    new_line, cls = markmoji(line)
+                else:
+                    # If we're in literal, keep line as is
+                    new_line, cls = line, []
                 # Add processed line
                 new_lines.append(new_line)
                 # Add class(es) used

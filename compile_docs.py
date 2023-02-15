@@ -42,7 +42,7 @@ for cls in markmoji.handlers.map.values():
         f"\n"
         f"## Example\n"
         f"```\n"
-        f"\\{cls.example}\n"
+        f"{cls.example}\n"
         f"```\n"
         f"{cls.example}\n"
         f"\n"
