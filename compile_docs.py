@@ -41,9 +41,11 @@ for cls in markmoji.handlers.map.values():
     content += (
         f"\n"
         f"## Example\n"
+        f"### Markdown:\n"
         f"```\n"
         f"{cls.example}\n"
         f"```\n"
+        f"### Result:\n"
         f"{cls.example}\n"
         f"\n"
     )
