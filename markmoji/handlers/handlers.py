@@ -85,31 +85,6 @@ class FacebookPostHandler(BaseMarkmojiHandler):
         return f"<iframe src='https://www.facebook.com/plugins/post.php?href={self.link}' class=facebook-embed></iframe>"
 
 
-class InstagramPostHandler(BaseMarkmojiHandler):
-    """
-    Handler for an embedded Instagram post.
-
-    ### Parameters
-    label (str)
-    :    Unused as embedded posts don't have alt text
-
-    link (str)
-    :    Link to the post to embed
-    """
-
-    emoji = "📷"
-    requirements = "<script async src='//www.instagram.com/embed.js'></script>"
-
-    example = "📷[OSR RPG cover by Kim Dias Holm](https://www.instagram.com/p/CkYXXhlt5N7)"
-    __author__ = "🦊"
-
-    @property
-    def html(self):
-        _, _, post_id = re.match("(https?://)?(www\.)?instagram\.com/p/([\w\d]*)", self.link).groups()
-
-        return f"<blockquote class='instagram-media' data-instgrm-captioned data-instgrm-permalink='https://www.instagram.com/p/{post_id}/?utm_source=ig_embed&amp;utm_campaign=loading' data-instgrm-version='14'><a href='https://www.instagram.com/p/{post_id}/?utm_source=ig_embed&amp;utm_campaign=loading'>{self.label}</a></blockquote>"
-
-
 class HexmapHandler(BaseMarkmojiHandler):
     """
     Handler for creating a hexagonal map using tiles from 
@@ -143,6 +118,31 @@ class HexmapHandler(BaseMarkmojiHandler):
             f"<h3>{self.label}</h3>\n"
             f"<hex-grid data-tiles='{data}' data-readonly></hex-grid>\n"
         )
+
+
+class InstagramPostHandler(BaseMarkmojiHandler):
+    """
+    Handler for an embedded Instagram post.
+
+    ### Parameters
+    label (str)
+    :    Unused as embedded posts don't have alt text
+
+    link (str)
+    :    Link to the post to embed
+    """
+
+    emoji = "📷"
+    requirements = "<script async src='//www.instagram.com/embed.js'></script>"
+
+    example = "📷[OSR RPG cover by Kim Dias Holm](https://www.instagram.com/p/CkYXXhlt5N7)"
+    __author__ = "🦊"
+
+    @property
+    def html(self):
+        _, _, post_id = re.match("(https?://)?(www\.)?instagram\.com/p/([\w\d]*)", self.link).groups()
+
+        return f"<blockquote class='instagram-media' data-instgrm-captioned data-instgrm-permalink='https://www.instagram.com/p/{post_id}/?utm_source=ig_embed&amp;utm_campaign=loading' data-instgrm-version='14'><a href='https://www.instagram.com/p/{post_id}/?utm_source=ig_embed&amp;utm_campaign=loading'>{self.label}</a></blockquote>"
 
 
 class TootHandler(BaseMarkmojiHandler):
