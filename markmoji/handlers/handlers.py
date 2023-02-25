@@ -85,6 +85,32 @@ class FacebookPostHandler(BaseMarkmojiHandler):
         return f"<iframe src='https://www.facebook.com/plugins/post.php?href={self.link}' class=facebook-embed></iframe>"
 
 
+class GoogleMapsHandler(BaseMarkmojiHandler):
+    """
+    Handler to embed a Google Maps map. For now, has to be the link provided by the 
+    "Embed HTML" feature in the Share menu.
+
+    ### Parameters
+    label (str)
+    :    Title for the map
+
+    file (str)
+    :    Link to this map from Google Maps
+    """
+    # Pushpin emoji, like a map marker
+    emoji = "📍"
+
+    example = "[Seattle Space Needle](<iframe src='https://www.google.com/maps/embed?pb=!1m13!1m8!1m3!1d2689.2893582036927!2d-122.3492774!3d47.6205063!3m2!1i1024!2i768!4f13.1!3m2!1m1!2s!5e0!3m2!1sen!2suk!4v1677327487668!5m2!1sen!2suk')"
+    __author__ = "🦊"
+
+    @property
+    def html(self):
+        # Construct iframe
+        return (
+            f"<iframe loading='lazy' allowfullscreen src='{self.link}'></iframe>"
+        )
+
+
 class HexmapHandler(BaseMarkmojiHandler):
     """
     Handler for creating a hexagonal map using tiles from 
@@ -97,7 +123,7 @@ class HexmapHandler(BaseMarkmojiHandler):
     file (str)
     :    Path or link to a csv file created via [Hexmap by Todd Parsons](https://teparsons.github.io/Hexmap/)
     """
-    # Elephant emoji, like what everyone's got on their Twitter usernames
+    # Hexagon emoji because HEXmap
     emoji = "⬢"
     requirements = "<script src='https://teparsons.github.io/Hexmap/hex.js' async='async'></script>"
 
@@ -112,7 +138,7 @@ class HexmapHandler(BaseMarkmojiHandler):
         elif Path(self.link).is_file():
             data = Path(self.link).read_text()
         else:
-            data = "[]"
+            data = ""
         # Construct hexmap
         return (
             f"<h3>{self.label}</h3>\n"
