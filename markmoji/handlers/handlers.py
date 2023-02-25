@@ -1,5 +1,10 @@
+# Base Python
 import re
-
+from pathlib import Path
+# Packages (must be specified in requirements.txt)
+import requests
+import validators
+# Relative imports
 from .base import BaseMarkmojiHandler
 
 
@@ -103,6 +108,41 @@ class InstagramPostHandler(BaseMarkmojiHandler):
         _, _, post_id = re.match("(https?://)?(www\.)?instagram\.com/p/([\w\d]*)", self.link).groups()
 
         return f"<blockquote class='instagram-media' data-instgrm-captioned data-instgrm-permalink='https://www.instagram.com/p/{post_id}/?utm_source=ig_embed&amp;utm_campaign=loading' data-instgrm-version='14'><a href='https://www.instagram.com/p/{post_id}/?utm_source=ig_embed&amp;utm_campaign=loading'>{self.label}</a></blockquote>"
+
+
+class HexmapHandler(BaseMarkmojiHandler):
+    """
+    Handler for creating a hexagonal map using tiles from 
+    [Cuddly Clover on itch.io](https://cuddlyclover.itch.io/fantasy-hex-tiles).
+
+    ### Parameters
+    label (str)
+    :    Title for the map
+
+    file (str)
+    :    Path or link to a csv file created via [Hexmap by Todd Parsons](https://teparsons.github.io/Hexmap/)
+    """
+    # Elephant emoji, like what everyone's got on their Twitter usernames
+    emoji = "⬢"
+    requirements = "<script src='https://teparsons.github.io/Hexmap/hex.js' async='async'></script>"
+
+    example = "⬢[Kashar](https://teparsons.github.io/Iuncterra/assets/locations/kashar/Kashar.csv)"
+    __author__ = "🦊"
+
+    @property
+    def html(self):
+        # Load data
+        if validators.url(self.link):
+            data = requests.get(self.link).text
+        elif Path(self.link).is_file():
+            data = Path(self.link).read_text()
+        else:
+            data = "[]"
+        # Construct hexmap
+        return (
+            f"<h3>{self.label}</h3>\n"
+            f"<hex-grid data-tiles='{data}' data-readonly></hex-grid>\n"
+        )
 
 
 class TootHandler(BaseMarkmojiHandler):
