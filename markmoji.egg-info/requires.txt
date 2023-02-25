@@ -1,2 +1,6 @@
+markdown
+requests
+validators
 
 [suggested]
+pybtex
