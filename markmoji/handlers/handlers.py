@@ -138,7 +138,7 @@ class HexmapHandler(BaseMarkmojiHandler):
         elif Path(self.link).is_file():
             data = Path(self.link).read_text()
         else:
-            data = ""
+            data = self.link
         # Construct hexmap
         return (
             f"<h3>{self.label}</h3>\n"
