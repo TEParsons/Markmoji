@@ -213,7 +213,7 @@ class SoundCloudHandler(BaseMarkmojiHandler):
     # Rainy cloud emoji, as cloud would be too easily confused with cloud storage
     emoji = "🌧️"
 
-    example = "🌧️[Virtue by Moondrift](https://soundcloud.com/moondrift/virtue)"
+    example = "🌧️[Virtue by Moondrift](https://soundcloud.com/moondrift/edge)"
     __author__ = "🦊"
 
     @property
