@@ -199,6 +199,28 @@ class IPAHandler(BaseMarkmojiHandler):
         return f"<a class='IPA' href='http://ipa-reader.xyz/?text={self.link}'>{self.label}</a>"
 
 
+class SoundCloudHandler(BaseMarkmojiHandler):
+    """
+    Handler for an embedded SoundCloud sound.
+
+    ### Parameters
+    label (str)
+    :    Unused as embedded sounds don't have alt text
+
+    link (str)
+    :    Link to the sound to embed
+    """
+    # Rainy cloud emoji, as cloud would be too easily confused with cloud storage
+    emoji = "🌧️"
+
+    example = "🌧️[Virtue by Moondrift](https://soundcloud.com/moondrift/virtue)"
+    __author__ = "🦊"
+
+    @property
+    def html(self):
+        return f"<iframe src='https://w.soundcloud.com/player/?url={self.link}'>"
+
+
 class TootHandler(BaseMarkmojiHandler):
     """
     Handler for an embedded toot (from Mastodon).
