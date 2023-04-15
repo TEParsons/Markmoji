@@ -221,6 +221,66 @@ class SoundCloudHandler(BaseMarkmojiHandler):
         return f"<iframe src='https://w.soundcloud.com/player/?url={self.link}'>"
 
 
+class TableHandler(BaseMarkmojiHandler):
+    """
+    Handler for an HTML table from a CSV file.
+
+    ### Parameters
+    label (str)
+    :    Title of the table
+
+    link (str)
+    :    Link to the CSV file to use
+    """
+    # Unfortunate there's no spreadsheet emoji... So we'll use the grid of numbers
+    emoji = "🔢"
+
+    example = "🔢[Kashar](https://teparsons.github.io/Iuncterra/assets/locations/kashar/Kashar.csv)"
+    __author__ = "🦊"
+
+    @property
+    def html(self):
+        # Load data
+        if validators.url(self.link):
+            data = requests.get(self.link).text
+        elif Path(self.link).is_file():
+            data = Path(self.link).read_text()
+        else:
+            data = self.link
+        # Parse data into list of lists
+        data = [row.split(",") for row in data.split("\n")]
+        # Construct table
+        code = (
+            f"<table>\n"
+            f"<caption>{self.label}</caption>\n"
+        )
+        for i, row in enumerate(data):
+            # Open row
+            code += (
+                "<tr>\n"
+            )
+            for cell in row:
+                # Use table heading rather than table cell for top row
+                if i == 0:
+                    tag = "th"
+                else:
+                    tag = "td"
+                # Write cell
+                code += (
+                    f"<{tag}>{cell}</{tag}>\n"
+                )
+            # Close row
+            code += (
+                "</tr>\n"
+            )
+        # Close table
+        code += (
+            "</table>\n"
+        )
+
+        return code
+
+
 class TootHandler(BaseMarkmojiHandler):
     """
     Handler for an embedded toot (from Mastodon).
