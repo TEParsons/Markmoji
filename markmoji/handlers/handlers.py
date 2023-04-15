@@ -196,7 +196,7 @@ class IPAHandler(BaseMarkmojiHandler):
         if not link:
             link = self.label
         # Return in link
-        return f"<a class='ipa' href='http://ipa-reader.xyz/?text={self.link}'>{self.label}</a>"
+        return f"<a class='IPA' href='http://ipa-reader.xyz/?text={self.link}'>{self.label}</a>"
 
 
 class TootHandler(BaseMarkmojiHandler):
