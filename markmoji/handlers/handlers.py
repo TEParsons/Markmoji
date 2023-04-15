@@ -171,6 +171,34 @@ class InstagramPostHandler(BaseMarkmojiHandler):
         return f"<blockquote class='instagram-media' data-instgrm-captioned data-instgrm-permalink='https://www.instagram.com/p/{post_id}/?utm_source=ig_embed&amp;utm_campaign=loading' data-instgrm-version='14'><a href='https://www.instagram.com/p/{post_id}/?utm_source=ig_embed&amp;utm_campaign=loading'>{self.label}</a></blockquote>"
 
 
+class IPAHandler(BaseMarkmojiHandler):
+    """
+    Handler to format text written in International Phonetic Alphabet, adding a link to ipa-reader.xyz
+    
+    
+    #### Parameters
+    label (str)
+    :    Text to display.
+
+    link (str)
+    :    IPA text to pronounce in ipa-reader.xyz. Leave blank to use text from label.
+    """
+    # Person speaking emoji, because it's a pronunciation guide
+    emoji = "🗣️"
+
+    example = "🗣️[aɪpʰieɪ](aɪpʰiːeɪ)"
+    __author__ = "🦊"
+
+    @property
+    def html(self):
+        # Get link (use label if none)
+        link = self.link
+        if not link:
+            link = self.label
+        # Return in link
+        return f"<a class='ipa' href='http://ipa-reader.xyz/?text={self.link}'>{self.label}</a>"
+
+
 class TootHandler(BaseMarkmojiHandler):
     """
     Handler for an embedded toot (from Mastodon).
