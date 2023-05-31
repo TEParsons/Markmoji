@@ -2,6 +2,7 @@ from .handlers import handlers, map
 from markdown.preprocessors import Preprocessor
 from markdown.extensions import Extension
 import re
+import emoji
 
 
 class Markmoji(Extension):
@@ -77,7 +78,11 @@ def markmoji(content:str):
             classes_used.append(cls)
         # Return object as HTML
         return obj.html
+    # Make list of emojis
     emojis = "|".join(list(map))
+    # Convert :emoji: syntax
+    content = emoji.emojize(content)
+    # Replace syntax with corresponding object
     content = re.sub(
         f"(?<!`)(\\\\)?({emojis})\[([^\]]*)\]\(([^\)]*)\)(?!`)", 
         _objectify, content)
