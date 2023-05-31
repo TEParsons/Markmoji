@@ -66,13 +66,23 @@ def markmoji(content:str):
         emoji = match.group(2)
         label = match.group(3)
         link = match.group(4)
-        # If escaped, return unescaped & unprocessed
-        if escaped:
-            return f"{emoji}[{label}]({link})"
+        paramStr = match.group(5) or ""
         # Find correct class from map of classes
         cls = map.get(emoji, handlers.UnknownHandler)
+        # Process params
+        params = {}
+        for pair in paramStr.split(","):
+            # Skip invalid pairs
+            if ":" not in pair:
+                continue
+            # Add valid pairs
+            key, val = pair.split(":", maxsplit=1)
+            params[key] = val.strip()
         # Create object
-        obj = cls(label=label, link=link)
+        obj = cls(label=label, link=link, params=params)
+        # If escaped, return unescaped & unprocessed
+        if escaped:
+            return obj.md
         # Mark this class as used
         if cls not in classes_used:
             classes_used.append(cls)
@@ -83,8 +93,13 @@ def markmoji(content:str):
     # Convert :emoji: syntax
     content = emoji.emojize(content)
     # Replace syntax with corresponding object
-    content = re.sub(
-        f"(?<!`)(\\\\)?({emojis})\[([^\]]*)\]\(([^\)]*)\)(?!`)", 
-        _objectify, content)
+    content = re.sub((
+        f"(?<!`)"  # not after code markers
+        f"(\\\\)?({emojis})"  # starts with an emoji (match 2)
+        f"\[([^\]]*)\]"  # something in square brackets (match 3)
+        f"\(([^\)]*)\)"  # something in round brackets (match 4)
+        f"(?:\{{([^\}}]*)\}})?"  # something in curly brackets (match 5) (optional)
+        f"(?!`)"
+    ), _objectify, content)
 
     return content, classes_used

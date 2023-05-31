@@ -24,7 +24,7 @@ class ExampleHandler(BaseMarkmojiHandler):
     # Anything which needs to be in <head> goes here, they will only be included once even if you have multiple markmojis
     requirements = "<script>console.log('hello world!')</script>"
     # Give us an example usage (for the documentation)
-    example = "⬇️[Google](https://google.com)"
+    example = "⬇️[Google](https://google.com){evil: false}"
     # Give yourself credit! Assign yourself an emoji in ../authors.py and cite it here
     __author__ = "🦊"
 
@@ -34,7 +34,7 @@ class ExampleHandler(BaseMarkmojiHandler):
         By overloading the `.html` property, I can control what gets 
         outputted when this handler is translated to html
         """
-        return f"<a href='{self.link}'>{self.label}</a>"
+        return f"<a href='{self.link}'{self.html_params}>{self.label}</a>"
 
 
 # --- From here on in, keep it alphabetical! ---
@@ -60,7 +60,7 @@ class AltmetricHandler(BaseMarkmojiHandler):
 
     @property
     def html(self):
-        return f"<div class='altmetric-citation'><div class='altmetric-embed' data-badge-type='donut' data-doi='{self.link}'></div><span>{self.label}</span></div>"
+        return f"<div class='altmetric-citation'{self.html_params}><div class='altmetric-embed' data-badge-type='donut' data-doi='{self.link}'></div><span>{self.label}</span></div>"
 
 
 class FacebookPostHandler(BaseMarkmojiHandler):
@@ -82,7 +82,7 @@ class FacebookPostHandler(BaseMarkmojiHandler):
 
     @property
     def html(self):
-        return f"<iframe src='https://www.facebook.com/plugins/post.php?href={self.link}' class=facebook-embed></iframe>"
+        return f"<iframe src='https://www.facebook.com/plugins/post.php?href={self.link}' class=facebook-embed{self.html_params}></iframe>"
 
 
 class GoogleMapsHandler(BaseMarkmojiHandler):
@@ -107,7 +107,7 @@ class GoogleMapsHandler(BaseMarkmojiHandler):
     def html(self):
         # Construct iframe
         return (
-            f"<iframe loading='lazy' allowfullscreen src='{self.link}'></iframe>"
+            f"<iframe loading='lazy' allowfullscreen src='{self.link}'{self.html_params}></iframe>"
         )
 
 
@@ -142,7 +142,7 @@ class HexmapHandler(BaseMarkmojiHandler):
         # Construct hexmap
         return (
             f"<h3>{self.label}</h3>\n"
-            f"<hex-grid data-tiles='{data}' data-readonly></hex-grid>\n"
+            f"<hex-grid data-tiles='{data}' data-readonly{self.html_params}></hex-grid>\n"
         )
 
 
@@ -168,7 +168,7 @@ class InstagramPostHandler(BaseMarkmojiHandler):
     def html(self):
         _, _, post_id = re.match("(https?://)?(www\.)?instagram\.com/p/([\w\d]*)", self.link).groups()
 
-        return f"<blockquote class='instagram-media' data-instgrm-captioned data-instgrm-permalink='https://www.instagram.com/p/{post_id}/?utm_source=ig_embed&amp;utm_campaign=loading' data-instgrm-version='14'><a href='https://www.instagram.com/p/{post_id}/?utm_source=ig_embed&amp;utm_campaign=loading'>{self.label}</a></blockquote>"
+        return f"<blockquote class='instagram-media' data-instgrm-captioned data-instgrm-permalink='https://www.instagram.com/p/{post_id}/?utm_source=ig_embed&amp;utm_campaign=loading' data-instgrm-version='14'{self.html_params}><a href='https://www.instagram.com/p/{post_id}/?utm_source=ig_embed&amp;utm_campaign=loading'>{self.label}</a></blockquote>"
 
 
 class IPAHandler(BaseMarkmojiHandler):
@@ -196,7 +196,7 @@ class IPAHandler(BaseMarkmojiHandler):
         if not link:
             link = self.label
         # Return in link
-        return f"<a class='IPA' href='http://ipa-reader.xyz/?text={self.link}'>{self.label}</a>"
+        return f"<a class='IPA' href='http://ipa-reader.xyz/?text={self.link}'{self.html_params}>{self.label}</a>"
 
 
 class SoundCloudHandler(BaseMarkmojiHandler):
@@ -218,7 +218,7 @@ class SoundCloudHandler(BaseMarkmojiHandler):
 
     @property
     def html(self):
-        return f"<iframe src='https://w.soundcloud.com/player/?url={self.link}'>"
+        return f"<iframe src='https://w.soundcloud.com/player/?url={self.link}'{self.html_params}>"
 
 
 class TableHandler(BaseMarkmojiHandler):
@@ -251,7 +251,7 @@ class TableHandler(BaseMarkmojiHandler):
         data = [row.split(",") for row in data.split("\n")]
         # Construct table
         code = (
-            f"<table>\n"
+            f"<table{self.html_params}>\n"
             f"<caption>{self.label}</caption>\n"
         )
         for i, row in enumerate(data):
@@ -307,7 +307,7 @@ class TootHandler(BaseMarkmojiHandler):
         if embed is None:
             link += "/embed"
         # Construct iframe
-        return f"<iframe src='{link}' class='mastodon-embed'></iframe>"
+        return f"<iframe src='{link}' class='mastodon-embed'{self.html_params}></iframe>"
 
 
 class TumblrPostHandler(BaseMarkmojiHandler):
@@ -333,7 +333,7 @@ class TumblrPostHandler(BaseMarkmojiHandler):
         # Get username and post id from link
         _, username, post_id, _ = re.match("(https?://)?([\w\d\-_]*)\.tumblr\.com/post/(\d*)(/.*)?", self.link).groups()
         # Construct holder
-        return f"<div class='tumblr-post' data-href='https://embed.tumblr.com/embed/post/{username}/{post_id}'><a href='{self.link}'></a></div>"
+        return f"<div class='tumblr-post' data-href='https://embed.tumblr.com/embed/post/{username}/{post_id}'{self.html_params}><a href='{self.link}'></a></div>"
 
 
 class TweetHandler(BaseMarkmojiHandler):
@@ -356,7 +356,7 @@ class TweetHandler(BaseMarkmojiHandler):
 
     @property
     def html(self):
-        return f"<blockquote class=twitter-tweet><a href='{self.link}'></a></blockquote>"
+        return f"<blockquote class=twitter-tweet{self.html_params}><a href='{self.link}'></a></blockquote>"
 
 
 class UnknownHandler(BaseMarkmojiHandler):
@@ -373,7 +373,7 @@ class UnknownHandler(BaseMarkmojiHandler):
 
     @property
     def html(self):
-        return f"{self.emoji}<a href='{self.link}'>{self.label}</a>"
+        return f"{self.emoji}<a href='{self.link}'{self.html_params}>{self.label}</a>"
 
 
 class YouTubeHandler(BaseMarkmojiHandler):
@@ -402,4 +402,4 @@ class YouTubeHandler(BaseMarkmojiHandler):
         else:
             video_id = self.link
 
-        return f"<iframe src='https://www.youtube.com/embed/{video_id}' title='{self.label}' class='youtube-embed' allowfullscreen></iframe>"
+        return f"<iframe src='https://www.youtube.com/embed/{video_id}' title='{self.label}' class='youtube-embed' allowfullscreen{self.html_params}></iframe>"
