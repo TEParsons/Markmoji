@@ -20,11 +20,11 @@ class ExampleHandler(BaseMarkmojiHandler):
     :    The value in round brackets from the given markdown string
     """
     # Pick an emoji to represent this handler, it should be something memorable and intuitive!
-    emoji = "⬇️"
+    emoji = "〽️"
     # Anything which needs to be in <head> goes here, they will only be included once even if you have multiple markmojis
     requirements = "<script>console.log('hello world!')</script>"
     # Give us an example usage (for the documentation)
-    example = "⬇️[Google](https://google.com){evil: false}"
+    example = "〽️[Google](https://google.com){evil: false}"
     # Give yourself credit! Assign yourself an emoji in ../authors.py and cite it here
     __author__ = "🦊"
 
