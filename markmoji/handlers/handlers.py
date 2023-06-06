@@ -199,6 +199,38 @@ class IPAHandler(BaseMarkmojiHandler):
         return f"<a class='IPA' href='http://ipa-reader.xyz/?text={self.link}'{self.html_params}>{self.label}</a>"
 
 
+class LinkedInPostHandler(BaseMarkmojiHandler):
+    """
+    Handler for an embedded LinkedIn post.
+
+    ### Parameters
+    label (str)
+    :    Hover text for the iframe
+
+    link (str)
+    :    Link to the post - either an embed link, direct link or URD value
+    """
+    # Rainy cloud emoji, as cloud would be too easily confused with cloud storage
+    emoji = "📠"
+
+    example = "📠[My body is ready for this great advice](linkedin.com/posts/reggie-fils-aime-nintendo_former-nintendo-of-america-exec-shares-the-activity-6957484429954945024-8q95)"
+    __author__ = "🦊"
+
+    @property
+    def html(self):
+        url = self.link
+
+        if "linkedin.com/posts/" in url:
+            # If it's a post link, parse it to get the URD
+            url = re.search("-(\d*)-", url).group(1)
+        
+        if "linkedin.com/embed/feed/update/" not in url:
+            # If it's not an embed link, make it one
+            url = f"https://www.linkedin.com/embed/feed/update/urn:li:activity:{url}"
+        
+        return f"<iframe src='{url}' title='{self.label}'></iframe>"
+
+
 class SoundCloudHandler(BaseMarkmojiHandler):
     """
     Handler for an embedded SoundCloud sound.
