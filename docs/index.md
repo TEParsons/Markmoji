@@ -1,6 +1,6 @@
 <head><link rel='stylesheet' href='style/style.css'></link></head>
 
-# Markmoji
+# ![Markmoji](style/Logotext.svg)
 
 Markmoji extends the [basic markdown syntax](https://www.markdownguide.org/basic-syntax/) using an easy to understand and quickly readable emoji-based syntax, allowing you to create custom HTML elements from just an emoji, a label and a URL.
 
