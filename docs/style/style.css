@@ -15,6 +15,7 @@
     --offblack: #0C1713;
 
     color: var(--offblack);
+    font-size: 16pt;
 }
 
 /** Background **/
