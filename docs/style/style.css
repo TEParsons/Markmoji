@@ -1,11 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins');
+@import url('https://fonts.googleapis.com/css2?family=Rubik');
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Colr+Emoji+Glyf');
 
 @import url('handlers.css');
 
 :root {
-    font-family: 'Poppins', 'Noto Colr Emoji Glyf';
+    font-family: 'Rubik', 'Noto Colr Emoji Glyf';
     
     --white: #fdfdfd;
     --offwhite: #f8f8f8;
