@@ -23,6 +23,7 @@ jobs:
         python compile_docs.py
     - name: Commit
       run: |
+        git config --global user.email "todd.e.parsons@gmail.com"
         git config --local user.name "github-actions[bot]"
         git add --all
         git commit --all -m "Build docs"
