@@ -24,7 +24,7 @@ jobs:
       run: |
         git config --local user.name "github-actions[bot]"
         git add --all
-        git commit --all -m "Build"
+        git commit --all -m "Build package"
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
