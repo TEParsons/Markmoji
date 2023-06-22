@@ -5,7 +5,7 @@ on:
     - dev
     - release
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     steps:
     - name: Setup Python

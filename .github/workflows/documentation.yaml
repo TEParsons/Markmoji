@@ -4,7 +4,7 @@ on:
     branches:
     - release
 jobs:
-  build:
+  compile:
     runs-on: ubuntu-latest
     steps:
     - name: Setup Python
