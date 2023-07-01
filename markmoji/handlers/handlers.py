@@ -60,7 +60,7 @@ class AltmetricHandler(BaseMarkmojiHandler):
 
     @property
     def html(self):
-        return f"<div class='altmetric-citation'{self.html_params}><div class='altmetric-embed' data-badge-type='donut' data-doi='{self.link}'></div><span>{self.label}</span></div>"
+        return f"<div class='altmetric-citation'{self.html_params}><div class='altmetric-embed' data-badge-type='donut' data-doi='{self.link}'></div><a href={self.link}>{self.label}</a></div>"
 
 
 class FacebookPostHandler(BaseMarkmojiHandler):
@@ -230,6 +230,26 @@ class LinkedInPostHandler(BaseMarkmojiHandler):
         
         return f"<iframe src='{url}' title='{self.label}'></iframe>"
 
+
+class ReadMoreHandler(BaseMarkmojiHandler):
+    """
+    Handler for a summary/details pair of HTML objects.
+
+    ### Parameters
+    label (str)
+    :   Content to go inside the <summary> tag (always shown)
+
+    link (str)
+    :   Content to go inside the <details> tag (hidden until clicked)
+    """
+    emoji = "↕"
+
+    example = "🌧️[This text will always be shown.](This text will only be visible)"
+    __author__ = "🦊"
+
+    @property
+    def html(self):
+        return f"<details{self.html_params}><summary>{self.label}</summary>{self.link}</details>'>"
 
 class SoundCloudHandler(BaseMarkmojiHandler):
     """
