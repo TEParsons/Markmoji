@@ -60,7 +60,7 @@ class AltmetricHandler(BaseMarkmojiHandler):
 
     @property
     def html(self):
-        return f"<div class='altmetric-citation'{self.html_params}><div class='altmetric-embed' data-badge-type='donut' data-doi='{self.link}'></div><a href={self.link}>{self.label}</a></div>"
+        return f"<div class='altmetric-citation'{self.html_params}><div class='altmetric-embed' data-badge-type='donut' data-doi='{self.link}'></div><a href=https://doi.org/{self.link}>{self.label}</a></div>"
 
 
 class FacebookPostHandler(BaseMarkmojiHandler):
