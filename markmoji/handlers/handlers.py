@@ -111,6 +111,85 @@ class GoogleMapsHandler(BaseMarkmojiHandler):
         )
 
 
+class GoogleMaterialIconHandler(BaseMarkmojiHandler):
+    """
+    Handler for inserting a Google Material icon.
+
+    ### Parameters
+    label (str)
+    :    Alt text to display if the icon doesn't load
+
+    link (str)
+    :    Name of the icon to insert
+    """
+    # Hollow circle with two dots
+    emoji = "⚇"
+    requirements = "<link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200' />"
+
+    example = "⚇[✅](check_circle)"
+    __author__ = "🦊"
+
+
+    @property
+    def html(self):
+        return (
+            "<span class='material-symbols-outlined'{self.font_variation_settings}>{self.link}</span>"
+        )
+
+    def split_params(self):
+        """
+        Split this handler's params into general html params and params specifically for the icon style.
+
+        ### Returns
+        dict
+        :   Params corresponding to font variation settings
+        dict
+        :   General HTML params
+        """
+        # copy params so they can be safely transformed
+        params = self.params.copy()
+        # pull out font variation settings
+        settings = {}
+        for key in ("FILL", "wght", "GRAD", "opsz"):
+            if key in params:
+                settings[key] = params.pop(key)
+            # include all cases
+            for variation in (key.lower(), key.upper(), key.title()):
+                if variation in params:
+                    settings[key] = params.pop(variation)
+        
+        return settings, params
+
+    @property
+    def html_params(self):
+        """
+        General HTML parameters, formatted for HTML.
+        """
+        output = []
+        # convert key:value pairs to strings
+        for key, val in self.split_params()[1]:
+            output += f" '{key}'={val}"
+        
+        return ",".join(output)
+    
+    @property
+    def font_variation_settings(self):
+        """
+        Parameters pertaining to font variation settings, formatted for CSS.
+        """
+        preface = " style='font-variation-settings:"
+        settings = []
+        # convert key:value pairs to strings
+        for key, val in self.split_params()[0]:
+            settings.append(f"'{key}' {val}")
+        
+        # if no settings, return blank
+        if not len(settings):
+            return ""
+        # otherwise, return joined by ,
+        return preface + ",".join(settings)
+
+
 class HexmapHandler(BaseMarkmojiHandler):
     """
     Handler for creating a hexagonal map using tiles from 
