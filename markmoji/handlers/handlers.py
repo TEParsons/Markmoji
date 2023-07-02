@@ -132,7 +132,7 @@ class GoogleMaterialIconHandler(BaseMarkmojiHandler):
     @property
     def html(self):
         return (
-            "<span class='material-symbols-outlined'{self.font_variation_settings}>{self.link}</span>"
+            f"<span class='material-symbols-outlined'{self.font_variation_settings}>{self.link}</span>"
         )
 
     def split_params(self):
