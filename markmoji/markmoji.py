@@ -92,6 +92,21 @@ def markmoji(content:str):
     emojis = "|".join(list(map))
     # Convert :emoji: syntax
     content = emoji.emojize(content)
+    # Convert autolink syntax
+    def _autolink(match):
+        escaped = match.group(1) or ""
+        emoji = match.group(2)
+        link = match.group(3)
+        paramStr = match.group(4) or ""
+
+        return f"{escaped}{emoji}[{link}]({link}){paramStr}"
+    content = re.sub((
+        f"(?<!`)"  # not after code markers
+        f"(\\\\)?({emojis})"  # starts with an emoji (match 2)
+        f"\<([^\]]*)\>"  # something in <> (match 3)
+        f"(?:\{{([^\}}]*)\}})?"  # something in curly brackets (match 4) (optional)
+        f"(?!`)"
+    ), _autolink, content)
     # Replace syntax with corresponding object
     content = re.sub((
         f"(?<!`)"  # not after code markers

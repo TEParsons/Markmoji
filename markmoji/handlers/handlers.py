@@ -77,7 +77,7 @@ class FacebookPostHandler(BaseMarkmojiHandler):
     # F in a square looks like the facebook logo
     emoji = "🅵"
 
-    example = "🅵[Funny comic](https://www.facebook.com/TheXKCD/posts/pfbid0KZZoxocUJYYE8NnZUHtpDkmr7Jw1qpMBE4QpFKBNBMVJByNX9iPctUfpRCmCwCiMl)"
+    example = "🅵<https://www.facebook.com/TheXKCD/posts/pfbid0KZZoxocUJYYE8NnZUHtpDkmr7Jw1qpMBE4QpFKBNBMVJByNX9iPctUfpRCmCwCiMl>"
     __author__ = "🦊"
 
     @property
@@ -239,7 +239,7 @@ class InstagramPostHandler(BaseMarkmojiHandler):
     emoji = "📷"
     requirements = "<script async src='//www.instagram.com/embed.js'></script>"
 
-    example = "📷[OSR RPG cover by Kim Dias Holm](https://www.instagram.com/p/CkYXXhlt5N7)"
+    example = "📷<https://www.instagram.com/p/CkYXXhlt5N7>"
     __author__ = "🦊"
 
     @property
@@ -264,7 +264,7 @@ class IPAHandler(BaseMarkmojiHandler):
     # Person speaking emoji, because it's a pronunciation guide
     emoji = "🗣️"
 
-    example = "🗣️[aɪpʰieɪ](aɪpʰiːeɪ)"
+    example = "🗣️<aɪpʰieɪ>"
     __author__ = "🦊"
 
     @property
@@ -343,7 +343,7 @@ class SoundCloudHandler(BaseMarkmojiHandler):
     # Rainy cloud emoji, as cloud would be too easily confused with cloud storage
     emoji = "🌧️"
 
-    example = "🌧️[Virtue by Moondrift](https://soundcloud.com/moondrift/edge)"
+    example = "🌧️<https://soundcloud.com/moondrift/edge>"
     __author__ = "🦊"
 
     @property
@@ -426,7 +426,7 @@ class TootHandler(BaseMarkmojiHandler):
     emoji = "🐘"
     requirements = "<script src='https://toot.wales/embed.js' async='async'></script>"
 
-    example = "🐘[God has a point](https://universeodon.com/@TheTweetOfGod/109597493614530062)"
+    example = "🐘<https://universeodon.com/@TheTweetOfGod/109597493614530062>"
     __author__ = "🦊"
 
     @property
@@ -455,7 +455,7 @@ class TumblrPostHandler(BaseMarkmojiHandler):
     emoji = "ⓣ"
     requirements = "<script async src='https://assets.tumblr.com/post.js'></script>"
 
-    example = "ⓣ[Some cute spooky pokémon](https://tinyleavesdream.tumblr.com/post/663071895596548096)"
+    example = "ⓣ<https://tinyleavesdream.tumblr.com/post/663071895596548096>"
     __author__ = "🦊"
 
     @property
@@ -481,7 +481,7 @@ class TweetHandler(BaseMarkmojiHandler):
     emoji = "🐦"
     requirements = "<script async src='https://platform.twitter.com/widgets.js' charset='utf-8'></script>"
 
-    example = "🐦[Ed Balls.](https://twitter.com/edballs/status/63623585020915713)"
+    example = "🐦<https://twitter.com/edballs/status/63623585020915713>"
     __author__ = "🦊"
 
     @property
