@@ -1,0 +1,56 @@
+Metadata-Version: 2.1
+Name: markmoji
+Version: 1.2.1
+Summary: Extends the basic markdown syntax using an easy to understand and quickly readable emoji-based syntax.
+Home-page: https://TEParsons.github.io/Markmoji
+Download-URL: https://github.com/TEParsons/Markmoji/archive/refs/tags/v1.2.tar.gz
+Author: Todd Parsons
+Author-email: todd.e.parsons@gmail.com
+Maintainer-email: todd.e.parsons@gmail.com
+Classifier: Development Status :: 4 - Beta
+Classifier: Operating System :: MacOS :: MacOS X
+Classifier: Operating System :: Microsoft :: Windows
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+Provides-Extra: suggested
+
+Markmoji extends the [basic markdown syntax](https://www.markdownguide.org/basic-syntax/) using an easy to understand and quickly readable emoji-based syntax, allowing you to create custom HTML elements from just an emoji, a label and a URL.
+
+## Installing
+Markmoji is on PyPi! To install, just copy the following into a terminal:
+
+```
+pip install markmoji
+```
+
+[Click here](https://datatofish.com/install-package-python-using-pip/) for more instructions on what installing from pip means.
+
+# The Syntax
+Similar to how basic markdown indicates an image using an exclamation point before a link (`![name](url)`), markmoji syntax uses an emoji beore a link (`🐦[name](url)`), with the emoji dictating the type of HTML element created.
+
+# Python function
+To parse markmoji syntax, just use the function `markmoji.markmoji()` with your markdown text as the input. It will return the same text but with any markmoji syntax returned as HTML objects.
+
+# Integration with [`python-markdown`](https://python-markdown.github.io/)
+Included in the package are the necessary classes to use markmoji as an extension to `markdown.Markdown`. Here's an example of how you might do it:
+```
+import markmoji
+import markdown as md
+
+# Define some dummy content
+content = "🏐[label1](link1)\n🏐[label2](link2)/n🐦[label3](link3)"
+# Create markdown processor with markmoji
+processor = md.Markdown(extensions=[markmoji.Markmoji()])
+# Do actual markdown conversion
+content = processor.convert(content)
+```
+
+# Contributing
+This is all designed with open source contribution in mind! To add your own handlers, check out the file `handlers/handlers.py` to see the existing implementations and some instructions on how to add your own. It's not all that hard to do, I promise!
