@@ -60,7 +60,7 @@ class AltmetricHandler(BaseMarkmojiHandler):
 
     @property
     def html(self):
-        return f"<div class='altmetric-citation'{self.html_params}><div class='altmetric-embed' data-badge-type='donut' data-doi='{self.link}'></div><span>{self.label}</span></div>"
+        return f"<div class='altmetric-citation'{self.html_params}><div class='altmetric-embed' data-badge-type='donut' data-doi='{self.link}'></div><a href=https://doi.org/{self.link}>{self.label}</a></div>"
 
 
 class FacebookPostHandler(BaseMarkmojiHandler):
@@ -109,6 +109,84 @@ class GoogleMapsHandler(BaseMarkmojiHandler):
         return (
             f"<iframe loading='lazy' allowfullscreen src='{self.link}'{self.html_params}></iframe>"
         )
+
+
+class GoogleMaterialIconHandler(BaseMarkmojiHandler):
+    """
+    Handler for inserting a Google Material icon.
+
+    ### Parameters
+    label (str)
+    :    Alt text to display if the icon doesn't load
+
+    link (str)
+    :    Name of the icon to insert
+    """
+    # Hollow circle with two dots
+    emoji = "⚇"
+    requirements = "<link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200' />"
+
+    example = "⚇[✅](check_circle){'FILL': 0, 'wght': 400, 'GRAD': 0, 'opsz': 48}"
+    __author__ = "🦊"
+
+    @property
+    def html(self):
+        return (
+            "<span class='material-symbols-outlined'{self.font_variation_settings}>{self.link}</span>"
+        )
+
+    def split_params(self):
+        """
+        Split this handler's params into general html params and params specifically for the icon style.
+
+        ### Returns
+        dict
+        :   Params corresponding to font variation settings
+        dict
+        :   General HTML params
+        """
+        # copy params so they can be safely transformed
+        params = self.params.copy()
+        # pull out font variation settings
+        settings = {}
+        for key in ("FILL", "wght", "GRAD", "opsz"):
+            if key in params:
+                settings[key] = params.pop(key)
+            # include all cases
+            for variation in (key.lower(), key.upper(), key.title()):
+                if variation in params:
+                    settings[key] = params.pop(variation)
+        
+        return settings, params
+
+    @property
+    def html_params(self):
+        """
+        General HTML parameters, formatted for HTML.
+        """
+        output = []
+        # convert key:value pairs to strings
+        for key, val in self.split_params()[1]:
+            output += f" '{key}'={val}"
+        
+        return ",".join(output)
+    
+    @property
+    def font_variation_settings(self):
+        """
+        Parameters pertaining to font variation settings, formatted for CSS.
+        """
+        preface = " style='font-variation-settings:"
+        settings = []
+        # convert key:value pairs to strings
+        for key, val in self.split_params()[0]:
+            settings.append(f"'{key}' {val}")
+        
+        # if no settings, return blank
+        if not len(settings):
+            return ""
+        # otherwise, return joined by ,
+        return preface + ",".join(settings)
 
 
 class HexmapHandler(BaseMarkmojiHandler):
@@ -230,6 +308,26 @@ class LinkedInPostHandler(BaseMarkmojiHandler):
         
         return f"<iframe src='{url}' title='{self.label}'></iframe>"
 
+
+class ReadMoreHandler(BaseMarkmojiHandler):
+    """
+    Handler for a summary/details pair of HTML objects.
+
+    ### Parameters
+    label (str)
+    :   Content to go inside the <summary> tag (always shown)
+
+    link (str)
+    :   Content to go inside the <details> tag (hidden until clicked)
+    """
+    emoji = "↕"
+
+    example = "🌧️[This text will always be shown.](This text will only be visible)"
+    __author__ = "🦊"
+
+    @property
+    def html(self):
+        return f"<details{self.html_params}><summary>{self.label}</summary>{self.link}</details>'>"
 
 class SoundCloudHandler(BaseMarkmojiHandler):
     """
