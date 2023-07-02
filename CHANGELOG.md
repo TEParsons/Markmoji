@@ -1,4 +1,16 @@
 # v1.3.0
+### Syntax changes
+- Markdown [autolink syntax](https://daringfireball.net/projects/markdown/syntax#autolink) is now respected, very handy for handlers which don't use a label! 
+
+This means that, instead of:
+```
+🗣️[aɪpʰieɪ](aɪpʰieɪ)
+```
+you can now do:
+```
+🗣️<aɪpʰieɪ>
+```
+
 ### New handlers
 - Readmore (↕): A summary/details pair of HTML objects.
 - Google Material icon (⚇): An icon from the Google Material set
