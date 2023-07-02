@@ -1,0 +1,20 @@
+<p><head><link rel='stylesheet' href='../style/style.css'></link></head></p>
+<h2><a href=".."><strong>&lt;</strong></a></h2>
+<h1><code>markmoji.handlers.ReadMoreHandler</code></h1>
+<p>Handler for a summary/details pair of HTML objects.</p>
+<h3>Parameters</h3>
+<dl>
+<dt>label (str)</dt>
+<dd>Content to go inside the <summary> tag (always shown)</dd>
+<dt>link (str)</dt>
+<dd>Content to go inside the <details> tag (hidden until clicked)</dd>
+</dl>
+<h2>Example</h2>
+<h3>Markdown:</h3>
+<pre><code>↕[This text will always be shown.](This text will only be visible)
+</code></pre>
+<h3>Result:</h3>
+<details><summary>This text will always be shown.</summary>This text will only be visible</details>
+<p>'&gt;</p>
+<h2>Author</h2>
+<p>Todd Parsons (🦊)</p>

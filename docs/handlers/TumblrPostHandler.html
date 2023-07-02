@@ -1,0 +1,21 @@
+<script async src='https://assets.tumblr.com/post.js'></script>
+<p><head><link rel='stylesheet' href='../style/style.css'></link></head></p>
+<h2><a href=".."><strong>&lt;</strong></a></h2>
+<h1><code>markmoji.handlers.TumblrPostHandler</code></h1>
+<p>Handler for an embedded Tumblr post</p>
+<h3>Parameters</h3>
+<dl>
+<dt>label (str)</dt>
+<dd>Unused as embedded Tumblr posts don't have alt text</dd>
+<dt>link (str)</dt>
+<dd>Link to the post to embed (format should be <code>{username}.tumblr.com/post/{numeric id}/whatever-else-it-doesn't-matter</code>)</dd>
+</dl>
+<h2>Example</h2>
+<h3>Markdown:</h3>
+<pre><code>ⓣ&lt;https://tinyleavesdream.tumblr.com/post/663071895596548096&gt;
+</code></pre>
+<h3>Result:</h3>
+<div class='tumblr-post' data-href='https://embed.tumblr.com/embed/post/tinyleavesdream/663071895596548096'><a href='https://tinyleavesdream.tumblr.com/post/663071895596548096'></a></div>
+
+<h2>Author</h2>
+<p>Todd Parsons (🦊)</p>
