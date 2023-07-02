@@ -322,7 +322,7 @@ class ReadMoreHandler(BaseMarkmojiHandler):
     """
     emoji = "↕"
 
-    example = "🌧️[This text will always be shown.](This text will only be visible)"
+    example = "↕[This text will always be shown.](This text will only be visible)"
     __author__ = "🦊"
 
     @property
